@@ -7,7 +7,7 @@ public class Concat implements Music {
     private final Music first;
     private final Music second;
     // Rep invariant: m1, m2 != null
-    
+
     private void checkRep() {
     }
     
@@ -27,6 +27,10 @@ public class Concat implements Music {
      */
     public Music first() {
         return first;
+    }
+    
+    public Music second(){
+        return this.second;
     }
     
     /**
