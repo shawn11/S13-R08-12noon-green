@@ -199,14 +199,15 @@ public class SequencePlayer {
      */
     public static void main(String[] args) {
         SequencePlayer player;
+        try{
 
-        // create a new player, with 120 beats (i.e. quarter note) per
-        // minute, with 2 tick per quarter note
-        player = new SequencePlayer(120, 2);
+            // create a new player, with 120 beats (i.e. quarter note) per
+            // minute, with 2 tick per quarter note
+            player = new SequencePlayer(120, 2);
 
-        final Pitch C = new Pitch('C');
-        int start = 1;
-        for (Pitch p : new Pitch[] {
+            final Pitch C = new Pitch('C');
+            int start = 1;
+            for (Pitch p : new Pitch[] {
                 new Pitch('C'),
                 new Pitch('D'),
                 new Pitch('E'),
@@ -222,15 +223,19 @@ public class SequencePlayer {
                 new Pitch('E'),
                 new Pitch('D'),
                 new Pitch('A'),
-        }) {
-            player.addNote(Instrument.PIANO, p.difference(C) + 60, start++, 1);
+            }) {
+                player.addNote(Instrument.PIANO, p.difference(C) + 60, start++, 1);
+            }
+
+            System.out.println(player);
+
+            // play!
+            player.play();
+        }catch(MidiUnavailableException e){
+            e.printStackTrace();
+        }catch(InvalidMidiDataException e){
+            e.printStackTrace();
         }
-
-        System.out.println(player);
-
-        // play!
-        player.play();
-
         /*
          * Note: A possible weird behavior of the Java sequencer: Even if the
          * sequencer has finished playing all of the scheduled notes and is
